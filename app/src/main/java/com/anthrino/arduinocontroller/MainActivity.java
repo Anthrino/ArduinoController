@@ -1,43 +1,74 @@
 package com.anthrino.arduinocontroller;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity {
+
+    private String[] functions;
+    private String selectedFn;
+    private Spinner functionSelector;
+    private Button submitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_student_attendance);
+
+        monthSelector = (Spinner) findViewById(R.id.spSelectMonth);
+        courseSelector = (Spinner) findViewById(R.id.spSelectCourse);
+        submitButton = (Button) findViewById(R.id.bSubmit);
+
+        this.monthList = new String[]{"Select Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        this.courseList = new SharedPreferenceManager(this).getCourseList();
+        this.courseList.add(0, "Select Course");
+
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, monthList);
+        monthSelector.setAdapter(adapter1);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, courseList);
+        courseSelector.setAdapter(adapter2);
+
+        UserRepository userRepository = ((AttendanceApp) getApplication()).getComponent().userRepository();
+        studentAttendancePresenter = new StudentAttendancePresenter(userRepository, this);
+        prefs = new SharedPreferenceManager(getApplicationContext());
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (monthSelector.getSelectedItemPosition() != 0) {
+                    month = monthSelector.getSelectedItem().toString();
+                    if (courseSelector.getSelectedItemPosition() != 0 && monthSelector.getSelectedItemPosition() != 0) {
+                        month = monthSelector.getSelectedItem().toString();
+                        course = courseSelector.getSelectedItem().toString();
+                        studentAttendancePresenter.fetchData(prefs.getRollNo(), month, course);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Select Course", Toast.LENGTH_SHORT).show();
+                        studentAttendancePresenter.fetchData(prefs.getRollNo(), month, "");
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Select Month", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void onNetworkException(Throwable e) {
+
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void onResponse(AttendanceResponse attendanceResponse) {
+        Toast.makeText(getApplicationContext(), String.valueOf(attendanceResponse.isSuccess()), Toast.LENGTH_LONG).show();
+        TextView overall_tv = (TextView) findViewById(R.id.tvOverallAttendance);
+        TextView course_tv = (TextView) findViewById(R.id.tvCourseAttendance);
+        overall_tv.append(String.valueOf(attendanceResponse.getOverall_apc()) + "%");
+        course_tv.append(String.valueOf(attendanceResponse.getCourse_apc()) + "%");
     }
+}
+
 }

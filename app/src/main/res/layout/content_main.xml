@@ -1,34 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="50dp"
+    android:orientation="vertical"
+    android:weightSum="10">
 
-    <TextView
-        android:id="@+id/title"
+    <Spinner
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Arduino Controller"
-        android:textSize="30sp" />
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/title"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Arduino Controller"
-        android:textSize="30sp" />
+        android:orientation="vertical"
+        android:layout_height="0dp"
+        android:layout_weight="8">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Arduino Controller"
-        android:textSize="30sp" />
+            <!--<TextView-->
+            <!--android:id="@+id/fragmentTitle"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="20dp"-->
+            <!--android:gravity="center|top"-->
+            <!--android:text="Control Fragment"-->
+            <!--android:textSize="25sp" />-->
 
+            <Switch
+                android:id="@+id/controlSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:text="" />
 
-    <TextView
-        android:layout_width=""
-        android:layout_height="" />
-    
+            <EditText
+                android:id="@+id/inputText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="40dp"
+                android:textColor="@color/colorPrimary" />
+
+        </LinearLayout>
+
     <Button
-        android:layout_width=""
-        android:layout_height="" />
+        android:id="@+id/Submit"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimaryDark"
+        android:text="Send"
+        android:textColor="@color/colorText"
+        android:textSize="20sp" />
+
 </LinearLayout>
