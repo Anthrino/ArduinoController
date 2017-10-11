@@ -1,4 +1,4 @@
-package com.anthrino.arduinocontroller;
+package com.anthrino.raspicontroller;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

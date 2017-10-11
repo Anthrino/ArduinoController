@@ -1,4 +1,4 @@
-package com.anthrino.arduinocontroller;
+package com.anthrino.raspicontroller;
 
 import org.junit.Test;
 
