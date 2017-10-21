@@ -58,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
                         LEDLayout.setVisibility(View.VISIBLE);
 //                        studentAttendancePresenter.fetchData(prefs.getRollNo(), month, "");
                     }
+                } else {
+                    LEDLayout.setVisibility(View.GONE);
+                    mediaLayout.setVisibility(View.GONE);
                 }
             }
 
@@ -70,31 +73,20 @@ public class MainActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                if (monthSelector.getSelectedItemPosition() != 0) {
-//                    month = monthSelector.getSelectedItem().toString();
-//                    if (courseSelector.getSelectedItemPosition() != 0 && monthSelector.getSelectedItemPosition() != 0) {
-//                        month = monthSelector.getSelectedItem().toString();
-//                        course = courseSelector.getSelectedItem().toString();
-//                        studentAttendancePresenter.fetchData(prefs.getRollNo(), month, course);
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), "Select Course", Toast.LENGTH_SHORT).show();
-//                        studentAttendancePresenter.fetchData(prefs.getRollNo(), month, "");
-//                    }
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "Select Month", Toast.LENGTH_SHORT).show();
-//                }
+                selectedFn = functionSelector.getSelectedItemPosition();
+                if (selectedFn != 0) {
+                    if (selectedFn == 1) {
+                        Toast.makeText(getApplicationContext(), "Connecting to Media Server", Toast.LENGTH_SHORT).show();
+                        // Send HTTP Request for media server
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Light Controls Active", Toast.LENGTH_SHORT).show();
+                        // Send HTTP Request for Light controls
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Select Option", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
-
-//    @Override
-//    public void onResponse(AttendanceResponse attendanceResponse) {
-//        Toast.makeText(getApplicationContext(), String.valueOf(attendanceResponse.isSuccess()), Toast.LENGTH_LONG).show();
-//        TextView overall_tv = (TextView) findViewById(R.id.tvOverallAttendance);
-//        TextView course_tv = (TextView) findViewById(R.id.tvCourseAttendance);
-//        overall_tv.append(String.valueOf(attendanceResponse.getOverall_apc()) + "%");
-//        course_tv.append(String.valueOf(attendanceResponse.getCourse_apc()) + "%");
-//    }
 }

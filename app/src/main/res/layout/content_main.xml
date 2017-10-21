@@ -30,7 +30,7 @@
         android:layout_margin="20dp"
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
-        android:text=""
+        android:text="FIRE"
         android:textColor="@color/colorText"
         android:textSize="20sp" />
 
