@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 /**
@@ -17,13 +19,38 @@ import android.widget.Toast;
  */
 
 public class LightsControlFrag extends Fragment {
-
-
+    public Switch s1,s2;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         final View rootview = inflater.inflate(R.layout.light_control,container,false);
+        s1=(Switch)rootview.findViewById(R.id.ledSwitch1);
+        s2=(Switch)rootview.findViewById(R.id.ledSwitch2);
+
+        s1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    new queryServer().execute("S1_ON");
+                }
+                else{
+                    new queryServer().execute("S1_OFF");
+                }
+            }
+        });
+
+        s2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    new queryServer().execute("S2_ON");
+                }
+                else{
+                    new queryServer().execute("S2_OFF");
+                }
+            }
+        });
         return rootview;
 
     }

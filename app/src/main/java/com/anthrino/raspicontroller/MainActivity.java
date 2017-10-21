@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabbedLayout;
     private PagerTitleStrip pagerTitleStrip;
     private Spinner functionSelector;
+    private String [] dummyAudioData,dummyVideoData,dummyPhotoData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
 
         viewpager.setAdapter(customPageAdapter);
         tabbedLayout.setupWithViewPager(viewpager);
+
+
+
+
     }
 
 }
