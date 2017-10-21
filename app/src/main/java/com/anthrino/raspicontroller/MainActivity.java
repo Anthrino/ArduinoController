@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Light Controls", Toast.LENGTH_SHORT).show();
                         mediaLayout.setVisibility(View.GONE);
                         LEDLayout.setVisibility(View.VISIBLE);
-//                        studentAttendancePresenter.fetchData(prefs.getRollNo(), month, "");
                     }
                 } else {
                     LEDLayout.setVisibility(View.GONE);
