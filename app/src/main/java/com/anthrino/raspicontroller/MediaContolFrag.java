@@ -74,7 +74,7 @@ public class MediaContolFrag extends Fragment {
                         Toast.makeText(rootview.getContext(), "Audio Storage", Toast.LENGTH_SHORT).show();
 
 //                        TODO:
-//                          new queryServer().execute("AS_REQ");
+//                          Create new AsyncTask class For Media Contol to fetch data from server
                         mediaMode = "Audio";
                         mediaAdapter = new ArrayAdapter<String>(rootview.getContext(), android.R.layout.simple_list_item_1, dummyAudioData);
                         mediaContentView.setAdapter(mediaAdapter);
@@ -82,7 +82,7 @@ public class MediaContolFrag extends Fragment {
                     } else if (index == 2) {
                         Toast.makeText(rootview.getContext(), "Video Storage", Toast.LENGTH_SHORT).show();
 //                        TODO:
-//                          new queryServer().execute("AS_REQ");
+//                          Create new AsyncTask class For Media Contol to fetch data from server
 
                         mediaMode = "Video";
                         mediaAdapter = new ArrayAdapter<String>(rootview.getContext(), android.R.layout.simple_list_item_1, dummyVideoData);
@@ -91,7 +91,7 @@ public class MediaContolFrag extends Fragment {
                     } else if (index == 3) {
                         Toast.makeText(rootview.getContext(), "Photo Storage", Toast.LENGTH_SHORT).show();
 //                        TODO:
-//                        new queryServer().execute("PS_REQ");
+//                          Create new AsyncTask class For Media Contol to fetch data from server
 
                         mediaMode = "Photo";
                         mediaAdapter = new ArrayAdapter<String>(rootview.getContext(), android.R.layout.simple_list_item_1, dummyPhotoData);
