@@ -108,6 +108,4 @@ public class queryServer extends AsyncTask<String,Void,String []> {
         LightsControlFrag.updateState(statuses);
         LightsControlFrag.progressFlag=true;
     }
-
-
 }

@@ -56,18 +56,18 @@
             android:layout_margin="5dp"
             android:layout_weight="9">
 
-            <ImageView
-                android:id="@+id/fragmentImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone" />
-
             <VideoView
                 android:id="@+id/fragmentVideo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone" />
         </MediaController>
+
+        <ImageView
+            android:id="@+id/fragmentImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
 
     </LinearLayout>
 
