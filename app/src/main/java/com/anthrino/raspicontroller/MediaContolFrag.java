@@ -1,5 +1,6 @@
 package com.anthrino.raspicontroller;
 
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +19,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Created by mit on 21/10/17.
@@ -61,10 +66,10 @@ public class MediaContolFrag extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int index, long l) {
                 TextView tv = rootview.findViewById(R.id.no_selection);
+                mediaLayout.setVisibility(View.GONE);
                 if (index != 0) {
                     tv.setVisibility(View.GONE);
                     mediaContentView.setVisibility(View.VISIBLE);
-
                     if (index == 1) {
                         Toast.makeText(rootview.getContext(), "Audio Storage", Toast.LENGTH_SHORT).show();
 
@@ -115,48 +120,47 @@ public class MediaContolFrag extends Fragment {
                 mediaContentView.setVisibility(View.GONE);
                 mediaLayout.setVisibility(View.VISIBLE);
                 mediaTitle.setText(fileName);
-                if (mediaMode == "Photo") {
-                    imageView.setVisibility(View.VISIBLE);
-                    videoView.setVisibility(View.GONE);
-                } else {
-                    videoView.setVisibility(View.VISIBLE);
-                    imageView.setVisibility(View.GONE);
+
+//                String mediaURL = "http://139.59.65.16:8000/" + mediaMode + "/" + fileName;
+                String mediaURL = "https://www.youtube.com/watch?v=HCYCvREMcCM";
+                Uri media = Uri.parse(mediaURL);
+
+                try {
+
+                    if (mediaMode == "Photo") {
+                        imageView.setVisibility(View.VISIBLE);
+                        videoView.setVisibility(View.GONE);
+
+                        URL photo = new URL(photoURL);
+                        imageView.setImageBitmap(new queryServer().execute(new String[]{"test","photo"}));
+                        url = new URL("http://studio52.tv/wp-content/uploads/2017/01/%5E313DF87713919104CECDC0E72AB4E58999A066F9F03EFE6311%5Epimgpsh_fullsize_distr.jpg");
+                        conn = (HttpURLConnection) url.openConnection();
+                        HttpURLConnection connection = (HttpURLConnection) photo.openConnection();
+                        InputStream inputStream = connection.getInputStream();
+                        return BitmapFactory.decodeStream(inputStream);
+
+                    } else {
+                        videoView.setVisibility(View.VISIBLE);
+                        imageView.setVisibility(View.GONE);
+
+                        mediacontroller.setAnchorView(videoView);
+                        videoView.setMediaController(mediacontroller);
+                        videoView.setVideoURI(media);
+                        videoView.requestFocus();
+                        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                            // Close the progress bar and play the video
+                            public void onPrepared(MediaPlayer mp) {
+                                videoView.start();
+                            }
+                        });
+                    }
+                } catch (Exception e) {
+//                    Log.e("Error", e.getMessage());
+                    e.printStackTrace();
                 }
-                mediaStreamService(fileName, mediaMode);
             }
         });
         return rootview;
     }
 
-    void mediaStreamService(String fileName, String mediaMode) {
-
-//        String mediaURL = "http://139.59.65.16:8000/" + mediaMode + "/" + fileName;
-        String mediaURL = "https://www.youtube.com/watch?v=HCYCvREMcCM";
-        Uri media = Uri.parse(mediaURL);
-        String photoURL = "http://zdnet2.cbsistatic.com/hub/i/2015/02/15/854dfd8d-bee3-41c1-a68b-d8554efcef85/0dc5a553715e4f5f620505bd62228155/raspi-logo.png";
-        Uri photo = Uri.parse(mediaURL);
-
-        try {
-            if (mediaMode != "Photo") {
-                mediacontroller.setAnchorView(videoView);
-                videoView.setMediaController(mediacontroller);
-                videoView.setVideoURI(media);
-                videoView.requestFocus();
-                videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    // Close the progress bar and play the video
-                    public void onPrepared(MediaPlayer mp) {
-                        videoView.start();
-                    }
-                });
-            } else {
-                mediacontroller.setAnchorView(imageView);
-                imageView.setImageURI(photo);
-            }
-        } catch (Exception e) {
-            Log.e("Error", e.getMessage());
-            e.printStackTrace();
-        }
-
-
-    }
 }

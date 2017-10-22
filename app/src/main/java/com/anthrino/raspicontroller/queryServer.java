@@ -84,6 +84,4 @@ public class queryServer extends AsyncTask<String,Void,Long> {
             Log.d("Networking",e.toString());}
         return new Long(5);
     }
-
-
 }
