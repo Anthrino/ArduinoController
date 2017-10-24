@@ -16,7 +16,7 @@ public class selectionPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-        switch(i) {
+        switch (i) {
             case 0:
                 LightsControlFrag frag1 = new LightsControlFrag();
                 return frag1;
@@ -25,7 +25,6 @@ public class selectionPageAdapter extends FragmentPagerAdapter {
                 return frag2;
         }
         return null;
-
     }
 
     @Override
@@ -35,14 +34,13 @@ public class selectionPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        switch(position){
+        switch (position) {
             case 0:
                 return "Lights";
             case 1:
                 return "Media";
         }
         return null;
-
     }
 }
 
