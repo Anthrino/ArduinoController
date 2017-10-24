@@ -6,10 +6,7 @@ import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -47,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    public void syncState(View v){
+
+    public void syncState(View v) {
         LightsControlFrag.syncState();
     }
 }

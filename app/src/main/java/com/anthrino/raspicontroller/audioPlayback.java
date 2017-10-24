@@ -26,10 +26,10 @@ public class audioPlayback extends AppCompatActivity implements MediaPlayer.OnPr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio_playback);
         audioDlProgress = (ProgressBar) findViewById(R.id.audioDLProgress);
-        title = (TextView) findViewById(R.id.audioTitle);
-        title.setText(getIntent().getStringExtra("filename"));
         audioDlProgress.setMax(100);
         audioDlProgress.setVisibility(View.VISIBLE);
+        title = (TextView) findViewById(R.id.audioTitle);
+        title.setText(getIntent().getStringExtra("filename"));
 
         try {
 

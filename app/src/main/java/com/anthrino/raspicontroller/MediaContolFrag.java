@@ -33,7 +33,7 @@ public class MediaContolFrag extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        new mediaStreamService().execute(new String[]{"meta", "http://139.59.65.16:8000/media.json"});
         final View rootview = inflater.inflate(R.layout.media_control, container, false);
         final Spinner functionSelector = rootview.findViewById(R.id.functionSpinner);
         mediaContentView = rootview.findViewById(R.id.MediaContentListView);
@@ -42,10 +42,10 @@ public class MediaContolFrag extends Fragment {
         mediaTitle = rootview.findViewById(R.id.mediaTitle);
 //        downloadProgressbar=rootview.findViewById(R.id.downloadProgressBar);
 //        downloadProgressbar.setMax(100);
-
-        dummyAudioData = new String[]{"BATMAN_BEGINS.mp3", "GOT.mp3",};
-        dummyVideoData = new String[]{"Shell_Sort.mp4", "Insertion_Sort.mp4", "Binary_Search.mp4"};
-        dummyPhotoData = new String[]{"vinay.jpeg", "jerin.jpeg", "mit.jpeg", "jay.jpeg", "meshde.png"};
+//
+//        dummyAudioData = new String[]{"BATMAN_BEGINS.mp3", "GOT.mp3",};
+//        dummyVideoData = new String[]{"Shell_Sort.mp4", "Insertion_Sort.mp4", "Binary_Search.mp4"};
+//        dummyPhotoData = new String[]{"vinay.jpeg", "jerin.jpeg", "mit.jpeg", "jay.jpeg", "meshde.png"};
 
         String[] functionList = new String[]{"Select Function", "Audio Storage", "Video Storage", "Photo Storage"};
         ArrayAdapter<String> adapter1 = new ArrayAdapter(rootview.getContext(), android.R.layout.simple_list_item_1, functionList);
@@ -62,23 +62,20 @@ public class MediaContolFrag extends Fragment {
                     mediaContentView.setVisibility(View.VISIBLE);
                     if (index == 1) {
                         Toast.makeText(rootview.getContext(), "Audio Storage", Toast.LENGTH_SHORT).show();
-
-//                        TODO: Create new AsyncTask class For getting Audio list from server
-                        mediaAdapter = new ArrayAdapter<String>(rootview.getContext(), android.R.layout.simple_list_item_1, dummyAudioData);
+                        mediaAdapter = new ArrayAdapter<String>(rootview.getContext(), android.R.layout.simple_list_item_1, mediaObject.audioList);
+//                        mediaAdapter = new ArrayAdapter<String>(rootview.getContext(), android.R.layout.simple_list_item_1, dummyAudioData);
                         mediaContentView.setAdapter(mediaAdapter);
 
                     } else if (index == 2) {
                         Toast.makeText(rootview.getContext(), "Video Storage", Toast.LENGTH_SHORT).show();
-//                        TODO: Create new AsyncTask class For getting Video list from server
-
-                        mediaAdapter = new ArrayAdapter<String>(rootview.getContext(), android.R.layout.simple_list_item_1, dummyVideoData);
+                        mediaAdapter = new ArrayAdapter<String>(rootview.getContext(), android.R.layout.simple_list_item_1, mediaObject.videoList);
+//                        mediaAdapter = new ArrayAdapter<String>(rootview.getContext(), android.R.layout.simple_list_item_1, dummyVideoData);
                         mediaContentView.setAdapter(mediaAdapter);
 
                     } else if (index == 3) {
                         Toast.makeText(rootview.getContext(), "Photo Storage", Toast.LENGTH_SHORT).show();
-//                        TODO: Create new AsyncTask class For getting Photo list from server
-
-                        mediaAdapter = new ArrayAdapter<String>(rootview.getContext(), android.R.layout.simple_list_item_1, dummyPhotoData);
+                        mediaAdapter = new ArrayAdapter<String>(rootview.getContext(), android.R.layout.simple_list_item_1, mediaObject.imageList);
+//                        mediaAdapter = new ArrayAdapter<String>(rootview.getContext(), android.R.layout.simple_list_item_1, dummyPhotoData);
                         mediaContentView.setAdapter(mediaAdapter);
                     }
                 } else {
