@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class mediaObject {
 
     static Bitmap photo = null;
-    static String[] imageList = null;
-    static String[] videoList = null;
-    static String[] audioList = null;
+    static ArrayList<String> imageList = new ArrayList<String>();
+    static ArrayList<String> videoList = new ArrayList<String>();
+    static ArrayList<String> audioList = new ArrayList<String>();
 }

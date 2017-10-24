@@ -33,7 +33,9 @@ public class MediaContolFrag extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         new mediaStreamService().execute(new String[]{"meta", "http://139.59.65.16:8000/media.json"});
+
         final View rootview = inflater.inflate(R.layout.media_control, container, false);
         final Spinner functionSelector = rootview.findViewById(R.id.functionSpinner);
         mediaContentView = rootview.findViewById(R.id.MediaContentListView);

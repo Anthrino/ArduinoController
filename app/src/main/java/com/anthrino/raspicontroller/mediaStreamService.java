@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ProgressBar;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -48,7 +49,7 @@ public class mediaStreamService extends AsyncTask<String, Void, Integer> {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (strings[0].equals("meta")) {
+        } else if (strings[0].equals("meta") && mediaObject.imageList.size() == 0) {
             try {
                 URL mreq = new URL(strings[1]);
                 HttpURLConnection connection = (HttpURLConnection) mreq.openConnection();
@@ -60,9 +61,25 @@ public class mediaStreamService extends AsyncTask<String, Void, Integer> {
                     content.append(line);
                 }
                 JSONObject jsonResp = new JSONObject(content.toString());
-                mediaObject.audioList = (String[]) jsonResp.get("music");
-                mediaObject.videoList = (String[]) jsonResp.get("videos");
-                mediaObject.imageList = (String[]) jsonResp.get("photos");
+                JSONArray audioList = (JSONArray) jsonResp.get("music");
+                JSONArray videoList = (JSONArray) jsonResp.get("videos");
+                JSONArray imageList = (JSONArray) jsonResp.get("photos");
+
+                int arraySize = audioList.length();
+                for (int i = 0; i < arraySize; i++) {
+                    mediaObject.audioList.add(i, (String) audioList.get(i));
+                }
+
+                arraySize = videoList.length();
+                for (int i = 0; i < arraySize; i++) {
+                    mediaObject.videoList.add(i, (String) videoList.get(i));
+                }
+
+                arraySize = imageList.length();
+                for (int i = 0; i < arraySize; i++) {
+                    mediaObject.imageList.add(i, (String) imageList.get(i));
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
