@@ -1,8 +1,6 @@
 package com.anthrino.raspicontroller;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,27 +9,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.MediaController;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 /**
  * Created by mit on 21/10/17.
  */
 
 public class MediaContolFrag extends Fragment {
-    public static boolean downLoadProgress=false;
-//    public static ProgressBar downloadProgressbar;
+    public static boolean downLoadProgress = false;
+    //    public static ProgressBar downloadProgressbar;
     public ListView mediaContentView;
     public View mediaLayout;
     private String[] dummyAudioData, dummyVideoData, dummyPhotoData;
     ArrayAdapter<String> mediaAdapter;
-//    public static ImageView imageView;
+    //    public static ImageView imageView;
 //    VideoView videoView;
     TextView mediaTitle;
 
@@ -51,7 +45,7 @@ public class MediaContolFrag extends Fragment {
 
         dummyAudioData = new String[]{"BATMAN_BEGINS.mp3", "GOT.mp3",};
         dummyVideoData = new String[]{"Shell_Sort.mp4", "Insertion_Sort.mp4", "Binary_Search.mp4"};
-        dummyPhotoData = new String[]{"vinay.jpeg", "jerin.jpeg", "mit.jpeg","jay.jpeg","meshde.png"};
+        dummyPhotoData = new String[]{"vinay.jpeg", "jerin.jpeg", "mit.jpeg", "jay.jpeg", "meshde.png"};
 
         String[] functionList = new String[]{"Select Function", "Audio Storage", "Video Storage", "Photo Storage"};
         ArrayAdapter<String> adapter1 = new ArrayAdapter(rootview.getContext(), android.R.layout.simple_list_item_1, functionList);
@@ -110,41 +104,28 @@ public class MediaContolFrag extends Fragment {
 //                mediaContentView.setVisibility(View.GONE);
 //                mediaLayout.setVisibility(View.VISIBLE);
 //                mediaTitle.setText(fileName);
-                String mediaURL="http://139.59.65.16:8000/static/";
-
+                String mediaURL = "http://139.59.65.16:8000/static/";
 
                 try {
 
                     if (functionSelector.getSelectedItemPosition() == 3) {
-                        mediaURL=mediaURL.concat("photos/"+fileName);
-                        Intent intent = new Intent(getActivity(),photoDisplay.class);
-                        intent.putExtra("Media_URL",mediaURL);
+                        mediaURL = mediaURL.concat("photos/" + fileName);
+                        Intent intent = new Intent(getActivity(), photoDisplay.class);
+                        intent.putExtra("Media_URL", mediaURL);
+                        intent.putExtra("filename", fileName);
                         startActivity(intent);
-
-
-
-                    } else if (functionSelector.getSelectedItemPosition() == 2){
-                        mediaURL=mediaURL.concat("videos/"+fileName);
-
-                        Intent intent = new Intent(getActivity(),videoPlayback.class);
-                        intent.putExtra("Media_URL",mediaURL);
+                    } else if (functionSelector.getSelectedItemPosition() == 2) {
+                        mediaURL = mediaURL.concat("videos/" + fileName);
+                        Intent intent = new Intent(getActivity(), videoPlayback.class);
+                        intent.putExtra("Media_URL", mediaURL);
+                        intent.putExtra("filename", fileName);
                         startActivity(intent);
-                    }
-                    else if (functionSelector.getSelectedItemPosition()==1){
-//                        Uri media = Uri.parse(mediaURL);
-//                        mediaURL=mediaURL.concat("music/"+fileName);
-//                        imageView.setVisibility(View.GONE);
-//                        videoView.setVisibility(View.VISIBLE);
-//                        MediaController mediacontroller = new MediaController(getActivity());
-//                        mediacontroller.setAnchorView(videoView);
-//                        videoView.setMediaController(mediacontroller);
-//                        videoView.setVideoURI(media);
-//                        videoView.requestFocus();
-//                        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//                            public void onPrepared(MediaPlayer mp) {
-//                                videoView.start();
-//                            }
-//                        });
+                    } else if (functionSelector.getSelectedItemPosition() == 1) {
+                        mediaURL = mediaURL.concat("music/" + fileName);
+                        Intent intent = new Intent(getActivity(), audioPlayback.class);
+                        intent.putExtra("Media_URL", mediaURL);
+                        intent.putExtra("filename", fileName);
+                        startActivity(intent);
                     }
                 } catch (Exception e) {
 //                    Log.e("Error", e.getMessage());

@@ -7,9 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.VideoView;
-
-import java.net.URL;
 
 /**
  * Created by mit on 23/10/17.
@@ -18,15 +17,19 @@ import java.net.URL;
 public class videoPlayback extends AppCompatActivity {
 
     private VideoView videoView;
+    public static TextView title;
     private Uri media;
     public static ProgressBar videoDownloadProgressBar;
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.video_playback);
         videoView = (VideoView) findViewById(R.id.fragmentVideo);
-        videoDownloadProgressBar=(ProgressBar)findViewById(R.id.videoDownloadProgressbar);
+        title = (TextView) findViewById(R.id.videoTitle);
+        title.setText(getIntent().getStringExtra("filename"));
+        videoDownloadProgressBar = (ProgressBar) findViewById(R.id.videoDownloadProgressbar);
         videoDownloadProgressBar.setMax(100);
         videoDownloadProgressBar.setVisibility(View.VISIBLE);
         media = Uri.parse(getIntent().getStringExtra("Media_URL"));
