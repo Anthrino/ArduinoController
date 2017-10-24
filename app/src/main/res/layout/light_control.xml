@@ -2,53 +2,54 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout
-    android:id="@+id/lightLayout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:weightSum="1"
-    android:gravity="center_horizontal"
-    android:layout_marginTop="60dp"
-    android:orientation="vertical"
-    android:layout_centerInParent="true">
 
-    <Switch
-        android:id="@+id/ledSwitch1"
+    <LinearLayout
+        android:id="@+id/lightLayout"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_margin="20dp"
-        android:layout_weight="0.1"
-        android:text="Light 1   " />
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="60dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-    <Switch
-        android:id="@+id/ledSwitch2"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_margin="20dp"
-        android:layout_weight="0.1"
-        android:text="Light 2   " />
+        <Switch
+            android:id="@+id/ledSwitch1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="20dp"
+            android:layout_weight="0.1"
+            android:text="Light 1   " />
+
+        <Switch
+            android:id="@+id/ledSwitch2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="20dp"
+            android:layout_weight="0.1"
+            android:text="Light 2   " />
 
 
-</LinearLayout>
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:textColor="#fff"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        android:padding="10dp"
-        android:text="Sync State"
         android:layout_below="@id/lightLayout"
         android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
         android:elevation="5dp"
-        android:onClick="syncState"/>
+        android:onClick="syncState"
+        android:padding="10dp"
+        android:text="Sync State"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textColor="#fff" />
 
     <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:id="@+id/progressBar"
         android:elevation="10dp"
-        android:visibility="gone"/>
-    </RelativeLayout>
+        android:visibility="gone" />
+</RelativeLayout>
